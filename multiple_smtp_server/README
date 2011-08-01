@@ -23,7 +23,7 @@ array of SMTP servers to find the relevant counterparts.
 Download
 --------
 This plugin can be downloaded from
-https://github.com/unstko/Roundcube-plugins/multiple_smtp_server
+https://github.com/unstko/Roundcube-plugins
 
 You can also check it out from its repository:
 $ git clone git://github.com/unstko/Roundcube-plugins
