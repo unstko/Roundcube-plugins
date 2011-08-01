@@ -2,3 +2,8 @@ Roundcube plugins
 =================
 My plugins for the webmailer Roundcube.
 See http://roundcube.net for more.
+
+
+Plugins
+-------
+* multiple_smtp_server: Set multiple SMTP server as counterparts of set IMAP mail hosts.
