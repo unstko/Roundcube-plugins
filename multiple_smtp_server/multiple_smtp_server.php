@@ -4,9 +4,9 @@
  *
  * Roundcube plugin to set multiple SMTP server.
  *
- * @version 0.1
+ * @version 0.1.1
  * @author Stefan Koch
- * @url https://github.com/unstko/Roundcube-plugins/multiple_smtp_server
+ * @url https://github.com/unstko/Roundcube-plugins
  * @licence MIT License
  *
  * Copyright (c) 2011 Stefan Koch
@@ -54,7 +54,7 @@ class multiple_smtp_server extends rcube_plugin
     }
 
     /**
-     * Callback method for SMTP connection
+     * Callback method for SMTP connection.
      *
      * @param mixed $args Argument containing context-specific data.
      * @return mixed Modified context-specific data.
@@ -64,15 +64,15 @@ class multiple_smtp_server extends rcube_plugin
         // Get rcmail instance
         $rcmail = rcmail::get_instance();
 
-        // Check for task "mail"
+        // Check for task mail
         if ($rcmail->task != "mail") {
             return $args;
         }
 
         // Load config from a distribution config file
         // and then merge a local configuration file overriding any settings
-        $this->load_config('config.inc.php.dist');
-        $this->load_config('config.inc.php');
+        $this->load_config('config/config.inc.php.dist');
+        $this->load_config('config/config.inc.php');
 
         // Get config values (global and local)
         $default_host = $rcmail->config->get('default_host', array());

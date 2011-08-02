@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+RELEASE 0.1.1
+-------------
+- Removed .gitignore from repository
+- Moved config files in config directory
+
+
 RELEASE 0.1
 -----------
 - First version working with Roundcube 0.5.3
