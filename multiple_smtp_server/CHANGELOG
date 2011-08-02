@@ -1,12 +1,18 @@
-CHANGELOG
-=========
+CHANGELOG Roundcube plugin multiple_smtp_server
+===============================================
+
+RELEASE 0.1.2
+-------------
+- Set rcmail instance as member variable
+- Load configuration in init method
+
 
 RELEASE 0.1.1
 -------------
-- Removed .gitignore from repository
-- Moved config files in config directory
+- Remove .gitignore from repository
+- Move config files in config directory
 
 
 RELEASE 0.1
 -----------
-- First version working with Roundcube 0.5.3
+- First public release working with Roundcube 0.5.3

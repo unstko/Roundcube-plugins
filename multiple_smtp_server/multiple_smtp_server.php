@@ -4,7 +4,7 @@
  *
  * Roundcube plugin to set multiple SMTP server.
  *
- * @version 0.1.1
+ * @version 0.1.2
  * @author Stefan Koch
  * @url https://github.com/unstko/Roundcube-plugins
  * @licence MIT License
@@ -37,17 +37,31 @@ class multiple_smtp_server extends rcube_plugin
     public $task = 'mail';
 
     /**
+     * @var mixed Instance of rcmail.
+     */
+    protected $rcmail = null;
+
+    /**
      * @var boolean Saves if list of hosts is blank.
      */
-    public $blank_hosts = false;
+    private $blank_hosts = false;
 
     /**
      * Mandatory method to initialize the plugin.
+     *
+     * @return void
      */
-    function init()
+    public function init()
     {
+        // Get rcmail instance
+        $this->rcmail = rcmail::get_instance();
+
         // Load localization
-        $this->add_texts('localization/');
+        $this->add_texts('localization');
+
+        // Load configuration
+        $this->load_config('config/config.inc.php.dist');
+        $this->load_config('config/config.inc.php');
 
         // Link hook for SMTP connection to method smtp_connect
         $this->add_hook('smtp_connect', array($this, 'smtp_connect'));
@@ -59,25 +73,17 @@ class multiple_smtp_server extends rcube_plugin
      * @param mixed $args Argument containing context-specific data.
      * @return mixed Modified context-specific data.
      */
-    function smtp_connect($args)
+    public function smtp_connect($args)
     {
-        // Get rcmail instance
-        $rcmail = rcmail::get_instance();
-
         // Check for task mail
-        if ($rcmail->task != "mail") {
+        if ($this->rcmail->task != "mail") {
             return $args;
         }
 
-        // Load config from a distribution config file
-        // and then merge a local configuration file overriding any settings
-        $this->load_config('config/config.inc.php.dist');
-        $this->load_config('config/config.inc.php');
-
         // Get config values (global and local)
-        $default_host = $rcmail->config->get('default_host', array());
-        $multiple_smtp_server = $rcmail->config->get('multiple_smtp_server', array());
-        $multiple_smtp_server_message = $rcmail->config->get('multiple_smtp_server_message', false);
+        $default_host = $this->rcmail->config->get('default_host', array());
+        $multiple_smtp_server = $this->rcmail->config->get('multiple_smtp_server', array());
+        $multiple_smtp_server_message = $this->rcmail->config->get('multiple_smtp_server_message', false);
 
         // Check config values
         if (!is_array($default_host) || !is_array($multiple_smtp_server) ||
@@ -116,7 +122,7 @@ class multiple_smtp_server extends rcube_plugin
                     }
                     $args['smtp_server'] = $smtp_server;
                     $args['smtp_user'] = $username;
-                    $args['smtp_pass'] = $rcmail->decrypt($password);
+                    $args['smtp_pass'] = $this->rcmail->decrypt($password);
                     break 2;
                 }
             }
@@ -138,14 +144,14 @@ class multiple_smtp_server extends rcube_plugin
                 }
                 $args['smtp_server'] = $smtp_server;
                 $args['smtp_user'] = $username;
-                $args['smtp_pass'] = $rcmail->decrypt($password);
+                $args['smtp_pass'] = $this->rcmail->decrypt($password);
                 break;
             }
         }
 
         // Show message
         if ($multiple_smtp_server_message) {
-            $rcmail->output->show_message("{$this->gettext('smtp_server_message')}: {$args['smtp_server']}" , 'confirmation');
+            $this->rcmail->output->show_message("{$this->gettext('smtp_server_message')}: {$args['smtp_server']}" , 'confirmation');
         }
 
         // Return (modified) arguments
