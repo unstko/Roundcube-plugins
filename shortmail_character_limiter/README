@@ -1,0 +1,41 @@
+Roundcube plugin shortmail character limiter
+============================================
+
+Introduction
+------------
+This plugin limits the characters of an email to 500 if the used IMAP host
+is shortmail (http://shortmail.com).
+
+
+Download
+--------
+This plugin can be downloaded from
+https://github.com/unstko/Roundcube-plugins
+
+You can also check it out from its repository:
+$ git clone git://github.com/unstko/Roundcube-plugins.git
+
+
+Installation
+------------
+Put the shortmail_character_limiter folder into the plugin folder and enable the
+plugin by adding shortmail_character_limiter into the
+$rcmail_config['plugins'] array.
+
+#Copy config/config.inc.php.dist to config/config.inc.php and modify it.
+
+
+Configuration
+-------------
+There is nothing to configurate yet.
+
+
+License
+-------
+This plugin is distributed under the MIT License.
+Please see shortmail_character_limiter.php for the complete license.
+
+
+Contribution
+------------
+Visit https://github.com/unstko/Roundcube-plugins if you want to contribute.
