@@ -76,7 +76,7 @@ class multiple_smtp_server extends rcube_plugin
     public function smtp_connect($args)
     {
         // Check for task mail
-        if ($this->rcmail->task != "mail") {
+        if (strcmp($this->rcmail->task, "mail")) {
             return $args;
         }
 
@@ -111,13 +111,13 @@ class multiple_smtp_server extends rcube_plugin
                 // Find right host
                 $url = parse_url($host_url);
                 $host = $url['host'];
-                if (!$host || $host != $imap_host) {
+                if (!$host || strcmp($host, $imap_host)) {
                     continue;
                 }
 
                 // Set SMTP server
                 foreach ($multiple_smtp_server as $imap_name => $smtp_server) {
-                    if ($imap_name != $host_name) {
+                    if (strcmp($imap_name, $host_name)) {
                         continue;
                     }
                     $args['smtp_server'] = $smtp_server;
@@ -141,7 +141,7 @@ class multiple_smtp_server extends rcube_plugin
 
             // Set SMTP server
             foreach ($multiple_smtp_server as $imap_host => $smtp_server) {
-                if ($imap_host != $host) {
+                if (strcmp($imap_host, $host)) {
                     continue;
                 }
                 $args['smtp_server'] = $smtp_server;
