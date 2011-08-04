@@ -7,8 +7,8 @@
  */
 $rcmail_config['multiple_smtp_server'] = array (
     'Host 1' => 'ssl://smtp.host1.com:465',
-    'Host 2' => 'tls://mailhost.host2.com:587',
-    'Host 3' => 'ssl://smtp.host3.com:587'
+    'Host 2' => 'ssl://mailhost.host2.com:465',
+    'Host 3' => 'tls://smtp.host3.com:587'
 );
 
 /**
@@ -17,8 +17,8 @@ $rcmail_config['multiple_smtp_server'] = array (
 /*
 $rcmail_config['multiple_smtp_server'] = array (
     'ssl://mail.host1.com:993' => 'ssl://smtp.host1.com:465',
-    'ssl://mailbox.host2.com:993' => 'tls://mailhost.host2.com:587',
-    'ssl://imap.host3.com:993' => 'ssl://smtp.host3.com:587'
+    'ssl://mailbox.host2.com:993' => 'ssl://mailhost.host2.com:465',
+    'ssl://imap.host3.com:993' => 'tls://smtp.host3.com:587'
 );
 */
 
