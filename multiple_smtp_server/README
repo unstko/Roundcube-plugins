@@ -34,7 +34,7 @@ Installation
 Put the multiple_smtp_server folder into the plugin folder and enable the
 plugin by adding multiple_smtp_server into the $rcmail_config['plugins'] array.
 
-Copy config.inc.php.dist to config.inc.php and modify it.
+Copy config/config.inc.php.dist to config/config.inc.php and modify it.
 
 
 Configuration
