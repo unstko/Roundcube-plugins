@@ -128,10 +128,12 @@ class multiple_smtp_server extends rcube_plugin
             }
         }
         else {
-            // Create complete host name
+            // Create complete host name (ssl, host and port)
             $host = "";
-            if ($imap_ssl) {
-                $host .= "ssl://";
+            if (isset($imap_ssl)) {
+                // Types: ssl, tls or imaps
+                $host .= $imap_ssl;
+                $host .= "://";
             }
             $host .= $imap_host;
             $host .= ":";
