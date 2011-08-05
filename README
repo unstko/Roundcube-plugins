@@ -6,4 +6,5 @@ All plugins work with version 0.5.3.
 
 Plugins
 -------
-* multiple_smtp_server: Set multiple SMTP server as counterparts of set IMAP mail hosts.
+* multiple_smtp_server: Set multiple SMTP server as counterparts of set
+  IMAP mail hosts.
