@@ -140,8 +140,8 @@ class multiple_smtp_server extends rcube_plugin
             $host .= $imap_port;
 
             // Set SMTP server
-            foreach ($multiple_smtp_server as $imap_host => $smtp_server) {
-                if (strcmp($imap_host, $host)) {
+            foreach ($multiple_smtp_server as $imap_url => $smtp_server) {
+                if (strcmp($imap_url, $host)) {
                     continue;
                 }
                 $args['smtp_server'] = $smtp_server;
