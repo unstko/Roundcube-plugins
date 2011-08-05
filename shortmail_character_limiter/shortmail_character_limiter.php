@@ -58,7 +58,7 @@ class shortmail_character_limiter extends rcube_plugin
         $this->rcmail = rcmail::get_instance();
 
         // Load localization
-        //$this->add_texts('localization');
+        $this->add_texts('localization', true);
 
         // Load configuration
         //$this->load_config('config/config.inc.php.dist');

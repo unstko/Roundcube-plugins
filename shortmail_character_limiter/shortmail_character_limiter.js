@@ -12,8 +12,8 @@ if (window.rcmail) {
         // Character limit
         var limit = 5;
 
-        // Characters left message
-        var message = "characters left";
+        // Character left message
+        var character_left_message = rcmail.gettext('character_left_message', 'shortmail_character_limiter');
 
         /**
          * Append input field to show left characters
