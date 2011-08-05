@@ -60,29 +60,28 @@ class shortmail_character_limiter extends rcube_plugin
         //$this->load_config('config/config.inc.php');
 
         // Link hook for the compose step to method message_compose
-        $this->add_hook('message_compose', array($this, 'message_compose'));
-
-        // Include javascript file
-        $this->include_script('shortmail_character_limiter.js');
+        $this->add_hook('render_page', array($this, 'render_page'));
     }
 
     /**
-     * Callback method for the compose step.
+     * Callback method for the render_page hook.
      *
-     * @param mixed $param Array with request parameters.
-     * @return mixed Compose parameters like 'to', 'subject', 'body'.
+     * @param mixed $template Name of the rendred template.
+     * @param string $content The HTML source.
+     * @return string Modified content.
      */
-    public function message_compose($param)
+    public function render_page($template, $content)
     {
-        // Check for task mail
-        if ($this->rcmail->task != "mail") {
-            return $args;
+        // Check for right task
+        if (strcmp($this->rcmail->task, $this->task)) {
+            return $content;
         }
 
-        // TODO: Add functionality to use the javascript file
+        // Include javascript file
+        //$this->include_script('shortmail_character_limiter.js');
 
-        // Return (modified) parameters
-        return $param;
+        // Return (modified) content
+        return $content;
     }
 }
 ?>
