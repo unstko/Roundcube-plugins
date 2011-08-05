@@ -111,8 +111,20 @@ class multiple_smtp_server extends rcube_plugin
                 // Find right host
                 $url = parse_url($host_url);
                 $host = $url['host'];
-                if (!$host || strcmp($host, $imap_host)) {
+                $port = $url['port'];
+                $scheme = $url['scheme'];
+                if (empty($host) || strcmp($host, $imap_host)) {
                     continue;
+                }
+                if (!empty($port)) {
+                    if ($port != $imap_port) {
+                        continue;
+                    }
+                }
+                if (!empty($scheme)) {
+                    if (!isset($imap_ssl) || strcmp($scheme, $imap_ssl)) {
+                        continue;
+                    }
                 }
 
                 // Set SMTP server
