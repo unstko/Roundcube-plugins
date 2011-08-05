@@ -75,8 +75,8 @@ class multiple_smtp_server extends rcube_plugin
      */
     public function smtp_connect($args)
     {
-        // Check for task mail
-        if (strcmp($this->rcmail->task, "mail")) {
+        // Check for rigth task
+        if (strcmp($this->rcmail->task, $this->task)) {
             return $args;
         }
 
