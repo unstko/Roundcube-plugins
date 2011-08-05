@@ -153,7 +153,15 @@ class multiple_smtp_server extends rcube_plugin
 
         // Show message
         if ($multiple_smtp_server_message) {
-            $this->rcmail->output->show_message("{$this->gettext('smtp_server_message')}: {$args['smtp_server']}" , 'confirmation');
+            $smtp_server_message = $this->gettext('smtp_server_message');
+            $url = parse_url($args['smtp_server']);
+            if (empty($url['port'])) {
+                $server_url = $args['smtp_server'].":".$args['smtp_port'];
+            }
+            else {
+                $server_url = $args['smtp_server'];
+            }
+            $this->rcmail->output->show_message("$smtp_server_message: $server_url" , 'confirmation');
         }
 
         // Return (modified) arguments
