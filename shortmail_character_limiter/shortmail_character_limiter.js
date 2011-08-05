@@ -1,34 +1,53 @@
+/**
+ * JavaScript file of Roundcube plugin shortmail_character_limiter.
+ * See PHP file shortmail_character_limiter.php for more information.
+ */
+
+// Test for Roundcube application object
 if (window.rcmail) {
+    /**
+     * Roundcube event listener to initialize plugin
+     */
     rcmail.addEventListener('init', function(evt) {
         // Character limit
         var limit = 5;
 
-        // Append field to show left characters
+        // Characters left message
+        var message = "characters left";
+
+        /**
+         * Append input field to show left characters
+         */
         $('#compose-buttons').append
         (
             $('<span>')
-                .attr('id', 'shortmail_character_limiter_field_left')
+                .attr('id', 'shortmail_character_limiter_span_left')
                 .html
                 (
                     $('<input>')
                         .attr('readonly', 'readonly')
                         .attr('type', 'text')
-                        .attr('name', 'shortmail_character_limiter_field_left')
+                        .attr('name', 'shortmail_character_limiter_input_left')
                         .attr('size', '3')
                         .attr('maxlength', '3')
                         .attr('value', limit)
-                )
+                ), ' ' + message
         );
 
-        // Bind keyup and keydown event handler to message text area
-        $('#compose-body').bind('keyup keydown', function() {
+        /**
+         * Bind keyup and keydown event handler to message text area
+         *
+         * Original character limiting function written by Nannette Thacker.
+         * http://www.shiningstar.net/articles/articles/javascript/dynamictextareacounter.asp
+         */
+        $('#compose-body').bind('keyup keydown click', function() {
             if (document.form._message.value.length > limit) {
                 // If too long, then trim it
                 document.form._message.value = document.form._message.value.substring(0, limit);
             }
             else {
                 // Otherwise update characters left counter
-                document.form.shortmail_character_limiter_field_left.value = limit - document.form._message.value.length;
+                document.form.shortmail_character_limiter_input_left.value = limit - document.form._message.value.length;
             }
         });
     });
