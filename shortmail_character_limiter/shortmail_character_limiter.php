@@ -5,7 +5,7 @@
  * Roundcube plugin to limit the characters of an email to 500 if the used IMAP
  * host is shortmail (http://shortmail.com).
  *
- * @version 0.0.1
+ * @version 0.1
  * @author Stefan Koch
  * @url https://github.com/unstko/Roundcube-plugins
  * @licence MIT License
