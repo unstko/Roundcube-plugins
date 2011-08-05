@@ -4,7 +4,7 @@
  *
  * Roundcube plugin to set multiple SMTP server.
  *
- * @version 0.1.2
+ * @version 0.2
  * @author Stefan Koch
  * @url https://github.com/unstko/Roundcube-plugins
  * @licence MIT License
