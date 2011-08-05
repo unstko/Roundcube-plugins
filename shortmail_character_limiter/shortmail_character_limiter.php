@@ -61,8 +61,8 @@ class shortmail_character_limiter extends rcube_plugin
         $this->add_texts('localization', true);
 
         // Load configuration
-        //$this->load_config('config/config.inc.php.dist');
-        //$this->load_config('config/config.inc.php');
+        $this->load_config('config/config.inc.php.dist');
+        $this->load_config('config/config.inc.php');
 
         // Link hook for the compose step to method message_compose
         $this->add_hook('render_page', array($this, 'render_page'));
@@ -82,11 +82,18 @@ class shortmail_character_limiter extends rcube_plugin
             return $content;
         }
 
+        // Get configuration
+        $shortmail_host = $this->rcmail->config->get('shortmail_host');
+        $character_limit = $this->rcmail->config->get('character_limit');
+
         // Get current IMAP host and test for shortmail host
         $imap_host = $_SESSION['imap_host'];
         if (strcmp($imap_host, $this->shortmail_host)) {
             return $content;
         }
+
+        // Set configuration for javascript file
+        $this->rcmail->output->set_env('character_limit', $character_limit);
 
         // Include javascript file
         $this->include_script('shortmail_character_limiter.js');

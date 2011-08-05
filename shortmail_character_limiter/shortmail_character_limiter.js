@@ -10,7 +10,7 @@ if (window.rcmail) {
      */
     rcmail.addEventListener('init', function(evt) {
         // Character limit
-        var limit = 5;
+        var limit = rcmail.env.character_limit;
 
         // Character left message
         var character_left_message = rcmail.gettext('character_left_message', 'shortmail_character_limiter');

@@ -1,0 +1,16 @@
+<?php
+
+// Configuration file for Roundcube plugin shortmail_character_limiter
+
+/**
+ * Shortmail IMAP host
+ */
+$rcmail_config['shortmail_host'] = "imap.shortmail.com";
+
+
+/**
+ * Character limit
+ */
+$rcmail_config['character_limit'] = 500;
+
+?>
