@@ -43,11 +43,6 @@ class shortmail_character_limiter extends rcube_plugin
     protected $rcmail = null;
 
     /**
-     * @var string IMAP host url of shortmail
-     */
-    private $shortmail_host = "imap.shortmail.com";
-
-    /**
      * Mandatory method to initialize the plugin.
      *
      * @return void
@@ -88,7 +83,8 @@ class shortmail_character_limiter extends rcube_plugin
 
         // Get current IMAP host and test for shortmail host
         $imap_host = $_SESSION['imap_host'];
-        if (strcmp($imap_host, $this->shortmail_host)) {
+        if (empty($imap_host) || empty($shortmail_host) ||
+            strcmp($imap_host, $shortmail_host)) {
             return $content;
         }
 
