@@ -75,8 +75,8 @@ class multiple_smtp_server extends rcube_plugin
      */
     public function smtp_connect($args)
     {
-        // Check for task mail
-        if ($this->rcmail->task != "mail") {
+        // Check for rigth task
+        if (strcmp($this->rcmail->task, $this->task)) {
             return $args;
         }
 
@@ -111,13 +111,25 @@ class multiple_smtp_server extends rcube_plugin
                 // Find right host
                 $url = parse_url($host_url);
                 $host = $url['host'];
-                if (!$host || $host != $imap_host) {
+                $port = $url['port'];
+                $scheme = $url['scheme'];
+                if (empty($host) || strcmp($host, $imap_host)) {
                     continue;
+                }
+                if (!empty($port)) {
+                    if ($port != $imap_port) {
+                        continue;
+                    }
+                }
+                if (!empty($scheme)) {
+                    if (!isset($imap_ssl) || strcmp($scheme, $imap_ssl)) {
+                        continue;
+                    }
                 }
 
                 // Set SMTP server
                 foreach ($multiple_smtp_server as $imap_name => $smtp_server) {
-                    if ($imap_name != $host_name) {
+                    if (strcmp($imap_name, $host_name)) {
                         continue;
                     }
                     $args['smtp_server'] = $smtp_server;
@@ -128,18 +140,20 @@ class multiple_smtp_server extends rcube_plugin
             }
         }
         else {
-            // Create complete host name
+            // Create complete host name (ssl, host and port)
             $host = "";
-            if ($imap_ssl) {
-                $host .= "ssl://";
+            if (isset($imap_ssl)) {
+                // Types: ssl, tls or imaps
+                $host .= $imap_ssl;
+                $host .= "://";
             }
             $host .= $imap_host;
             $host .= ":";
             $host .= $imap_port;
 
             // Set SMTP server
-            foreach ($multiple_smtp_server as $imap_host => $smtp_server) {
-                if ($imap_host != $host) {
+            foreach ($multiple_smtp_server as $imap_url => $smtp_server) {
+                if (strcmp($imap_url, $host)) {
                     continue;
                 }
                 $args['smtp_server'] = $smtp_server;
@@ -151,7 +165,15 @@ class multiple_smtp_server extends rcube_plugin
 
         // Show message
         if ($multiple_smtp_server_message) {
-            $this->rcmail->output->show_message("{$this->gettext('smtp_server_message')}: {$args['smtp_server']}" , 'confirmation');
+            $smtp_server_message = $this->gettext('smtp_server_message');
+            $url = parse_url($args['smtp_server']);
+            if (empty($url['port'])) {
+                $server_url = $args['smtp_server'].":".$args['smtp_port'];
+            }
+            else {
+                $server_url = $args['smtp_server'];
+            }
+            $this->rcmail->output->show_message("$smtp_server_message: $server_url" , 'confirmation');
         }
 
         // Return (modified) arguments
