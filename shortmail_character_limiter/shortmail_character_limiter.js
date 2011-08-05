@@ -6,7 +6,7 @@
 // Test for Roundcube application object
 if (window.rcmail) {
     /**
-     * Roundcube event listener to initialize plugin
+     * Roundcube event listener to initialize plugin.
      */
     rcmail.addEventListener('init', function(evt) {
         // Character limit
@@ -16,7 +16,7 @@ if (window.rcmail) {
         var character_left_message = rcmail.gettext('character_left_message', 'shortmail_character_limiter');
 
         /**
-         * Append input field to show left characters
+         * Append input field to show left characters.
          */
         $('#compose-buttons').append
         (
@@ -31,11 +31,11 @@ if (window.rcmail) {
                         .attr('size', '3')
                         .attr('maxlength', '3')
                         .attr('value', limit)
-                ), ' ' + message
+                ), ' ' + character_left_message
         );
 
         /**
-         * Bind keyup and keydown event handler to message text area
+         * Bind keyup and keydown event handler to message text area.
          *
          * Original character limiting function written by Nannette Thacker.
          * http://www.shiningstar.net/articles/articles/javascript/dynamictextareacounter.asp
