@@ -22,12 +22,14 @@ Put the shortmail_character_limiter folder into the plugin folder and enable the
 plugin by adding shortmail_character_limiter into the
 $rcmail_config['plugins'] array.
 
-#Copy config/config.inc.php.dist to config/config.inc.php and modify it.
+You can copy config/config.inc.php.dist to config/config.inc.php if you want to
+modify it.
 
 
 Configuration
 -------------
-There is nothing to configurate yet.
+You can change the IMAP host to another than imap.shortmail.com.
+You can set the character limit to another than 500.
 
 
 License
