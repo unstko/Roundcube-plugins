@@ -13,7 +13,8 @@ if (window.rcmail) {
         var limit = rcmail.env.character_limit;
 
         // Character left message
-        var character_left_message = rcmail.gettext('character_left_message', 'shortmail_character_limiter');
+        var character_left_message =
+        rcmail.gettext('character_left_message', 'shortmail_character_limiter');
 
         /**
          * Append input field to show left characters.
@@ -43,33 +44,14 @@ if (window.rcmail) {
         $('#compose-body').bind('keyup keydown click', function() {
             if (document.form._message.value.length > limit) {
                 // If too long, then trim it
-                document.form._message.value = document.form._message.value.substring(0, limit);
+                document.form._message.value =
+                document.form._message.value.substring(0, limit);
             }
             else {
                 // Otherwise update characters left counter
-                document.form.shortmail_character_limiter_input_left.value = limit - document.form._message.value.length;
+                document.form.shortmail_character_limiter_input_left.value =
+                limit - document.form._message.value.length;
             }
         });
     });
-}
-
-/**
- * Limit the number of characters per textarea.
- * Use one function for multiple text areas on a page.
- * Dynamic version by Nannette Thacker.
- * http://www.shiningstar.net
- * http://www.shiningstar.net/articles/articles/javascript/dynamictextareacounter.asp
- * Original by Ronnie T. Moore.
- * http://www.javascript.com
- */
-function character_limiter(field, cntfield, maxlimit)
-{
-    if (field.value.length > maxlimit) {
-        // If too long, then trim it
-        field.value = field.value.substring(0, maxlimit);
-    }
-    else {
-        // Otherwise update characters left counter
-        cntfield.value = maxlimit - field.value.length;
-    }
 }
