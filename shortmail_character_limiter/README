@@ -26,6 +26,13 @@ You can copy config/config.inc.php.dist to config/config.inc.php if you want to
 modify it.
 
 
+Bug
+---
+There is a bug when I tested the Plugin. I only can write 498 characters in an
+shortmail. With more shortmail refuses the mail with the reason that there are
+too many characters. Please try out the plugin and send my your experiences.
+
+
 Configuration
 -------------
 You can change the IMAP host to another than imap.shortmail.com.

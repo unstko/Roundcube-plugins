@@ -10,7 +10,9 @@ $rcmail_config['shortmail_host'] = "imap.shortmail.com";
 
 /**
  * Character limit
+ * (See README for bug)
  */
-$rcmail_config['character_limit'] = 500;
+$rcmail_config['character_limit'] = 498;
+//$rcmail_config['character_limit'] = 500;
 
 ?>
